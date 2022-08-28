@@ -1,40 +1,33 @@
-// const pluginTester = require('babel-plugin-tester').default
-// const plugin = require('../packages/core/dist/index').default
-
 import test from 'babel-plugin-tester';
-import plugin from '../packages/core/src/index';
+import plugin, { PLUGIN_NAME } from '../packages/core/src/index';
+import { distance, font } from '../packages/core/src/properties';
 
 test({
-
   plugin,
-
-  pluginName: 'babel-plugin-react-native-style',
-
+  pluginOptions: {
+    configs: [
+      {
+        properties: distance,
+        module: 'scaleSize',
+        source: 'scaleSizeLib',
+      },
+      {
+        properties: font,
+        module: 'scaleFont',
+        source: 'scaleFontLib',
+      },
+    ],
+  },
+  pluginName: PLUGIN_NAME,
   tests: [
     {
       code: `
-          function sayHi(person = 'World') {
-            return 'Hello ' + person + '!'
-          }
+          const styles = StyleSheet.create({
+            margin:10,
+            padding:20
+          })
         `,
       snapshot: true,
     },
-    {
-      code: `
-          const styles = {
-            container: { padding: '10px 10px 10px' }
-          }
-        `,
-      snapshot: true,
-    },
-    {
-      code: `
-          const styles = {
-            container: { height: '100vh' }
-          }
-        `,
-      snapshot: true,
-    },
-   
   ],
 });
