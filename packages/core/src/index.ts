@@ -3,7 +3,7 @@ import { NodePath } from '@babel/core';
 import * as t from '@babel/types';
 export { distance, font } from './properties';
 
-export const PLUGIN_NAME = 'babel-plugin-react-native-style-sheet';
+export const PLUGIN_NAME = 'babel-plugin-react-native-style-adaptation';
 const validateStatus = Symbol(PLUGIN_NAME);
 
 interface Config {

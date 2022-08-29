@@ -1,7 +1,7 @@
 {
-  "name": "babel-plugin-react-native-style-sheet",
-  "version": "2.0.0",
-  "description": "Improve the writing stylesheet experience",
+  "name": "babel-plugin-react-native-style-adaptation",
+  "version": "0.0.0",
+  "description": "Add device-appropriate handlers to stylesheets so you don't have to manually add them during development",
   "main": "lib/index.js",
   "directories": {
     "test": "test"
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:kukudeshiyi/babel-plugin-react-native-style-sheet.git"
+    "url": "git@github.com:kukudeshiyi/babel-plugin-react-native-style-adaptation.git"
   },
   "keywords": [
     "babel-plugin",
@@ -27,9 +27,9 @@
     "lib"
   ],
   "bugs": {
-    "url": "https://github.com/kukudeshiyi/babel-plugin-react-native-style-sheet/issues"
+    "url": "https://github.com/kukudeshiyi/babel-plugin-react-native-style-adaptation/issues"
   },
-  "homepage": "https://github.com/kukudeshiyi/babel-plugin-react-native-style-sheet#readme",
+  "homepage": "https://github.com/kukudeshiyi/babel-plugin-react-native-style-adaptation#babel-plugin-react-native-style-sheet",
   "devDependencies": {
     "@types/babel__core": "^7.1.6",
     "eslint-config-airbnb-base": "^14.1.0",
