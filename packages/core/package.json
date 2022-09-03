@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "description": "Add device-appropriate handlers to stylesheets so you don't have to manually add them during development",
   "main": "lib/index.js",
+  "types": "module",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "rimraf lib && tsc"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,7 @@
     "stylesheet",
     "react-native-stylesheet"
   ],
-  "author": "liqi.shi",
+  "author": "yi.shi",
   "license": "MIT",
   "files": [
     "lib"

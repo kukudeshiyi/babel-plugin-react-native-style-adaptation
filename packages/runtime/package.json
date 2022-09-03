@@ -1,0 +1,31 @@
+{
+  "name": "react-native-style-adaptation-runtime",
+  "version": "0.0.0",
+  "description": "react native device adaptation utiltis",
+  "main": "lib/index.js",
+  "types": "module",
+  "files": [
+    "lib"
+  ],
+  "keywords": [
+    "react-native",
+    "stylesheet",
+    "adaptation"
+  ],
+  "scripts": {
+    "build": "rimraf lib && tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:kukudeshiyi/babel-plugin-react-native-style-adaptation.git"
+  },
+  "author": "yi.shi",
+  "license": "MIT",
+  "peerDependencies": {
+    "react-native": "^0.50"
+  },
+  "devDependencies": {
+    "@types/react-native": "^0.69.6",
+    "react-native": "^0.69.5"
+  }
+}

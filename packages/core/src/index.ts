@@ -20,8 +20,8 @@ interface State {
 export default (): PluginObj<State> => {
   return {
     name: PLUGIN_NAME,
-    pre(state) {
-      state[validateStatus] = validate(state.opts?.configs || []);
+    pre() {
+      this[validateStatus] = validate(this.opts?.configs || []);
     },
     visitor: {
       ObjectProperty(path, state) {
@@ -32,7 +32,7 @@ export default (): PluginObj<State> => {
 };
 
 function normalTransform(path: NodePath<t.ObjectProperty>, state: State) {
-  if (!state[validateStatus]) {
+  if (!state[validateStatus] || !t.isIdentifier(path.node.key)) {
     return;
   }
 
@@ -62,6 +62,11 @@ function injectImportExpression(
   source: Config['source'],
 ) {
   const programPath = currentPath.findParent((parentNode) => t.isProgram(parentNode));
+
+  if (!programPath) {
+    return;
+  }
+
   const find = (callback: (path: NodePath<t.Node>) => boolean) =>
     programPath.get('body').find(callback);
   const firstImportNodePath = find((nodePath) => t.isImportDeclaration(nodePath.node));
@@ -69,6 +74,8 @@ function injectImportExpression(
   if (!firstImportNodePath && isProgramNode(programPath.node)) {
     return programPath.node.body.unshift(createImportDeclarationNode(module, source));
   }
+
+  // TODO：如果代码中存在 module 相同，但是 source 不同的模块，则不会再引入对应 source 的模块，而是使用现有模块
 
   const matchedLibraryPath = find(
     (nodePath) => t.isImportDeclaration(nodePath.node) && nodePath.node.source.value === source,
@@ -81,7 +88,6 @@ function injectImportExpression(
     ]);
   }
 
-  // fix type error
   if (matchedLibraryPath && isImportDeclarationNode(matchedLibraryPath.node)) {
     const importNode = matchedLibraryPath.node;
     if (!importNode.specifiers) {
@@ -93,6 +99,7 @@ function injectImportExpression(
     if (isModuleExist) {
       return;
     }
+
     importNode.specifiers.push(t.importSpecifier(t.identifier(module), t.identifier(module)));
   }
 }

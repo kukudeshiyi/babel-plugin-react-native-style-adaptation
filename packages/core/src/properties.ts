@@ -1,81 +1,45 @@
-// export const allowProperties = [
-//   'margin',
-//   'padding',
-//   'borderRadius',
-//   'border',
-//   'borderTop',
-//   'borderLeft',
-//   'borderBottom',
-//   'borderRight',
-//   'font',
-//   'boxShadow',
-//   'background',
-//   'flex',
-//   'flexFlow',
-//   'fontFamily',
-//   'fontVariant',
-//   'shadowOffset',
-//   'textShadow',
-//   'textShadowOffset',
-//   'transform',
-// ];
+export const width = ['width', 'maxWidth', 'minWidth'];
 
-// export const lengthProperties = [
-//   'borderBottomEndRadius',
-//   'borderBottomLeftRadius',
-//   'borderBottomRightRadius',
-//   'borderBottomStartRadius',
-//   'borderBottomWidth',
-//   'borderLeftWidth',
-//   'borderRadius',
-//   'borderRightWidth',
-//   'borderTopEndRadius',
-//   'borderTopLeftRadius',
-//   'borderTopRightRadius',
-//   'borderTopStartRadius',
-//   'borderTopWidth',
-//   'borderWidth',
-//   'borderEndWidth',
-//   'borderStartWidth',
-//   'bottom',
-//   'height',
-//   'left',
-//   'margin',
-//   'marginBottom',
-//   'marginEnd',
-//   'marginHorizontal',
-//   'marginLeft',
-//   'marginRight',
-//   'marginStart',
-//   'marginTop',
-//   'marginVertical',
-//   'maxHeight',
-//   'maxWidth',
-//   'minHeight',
-//   'minWidth',
-//   'padding',
-//   'paddingBottom',
-//   'paddingEnd',
-//   'paddingHorizontal',
-//   'paddingLeft',
-//   'paddingRight',
-//   'paddingStart',
-//   'paddingTop',
-//   'paddingVertical',
-//   'position',
-//   'right',
-//   'top',
-//   'width',
-//   'textShadowOffset',
-//   'fontSize',
-//   'lineHeight',
-//   'textShadowRadius',
-//   'includeFontPadding',
-//   'letterSpacing',
-//   'shadowRadius',
-// ];
+export const height = ['height', 'maxHeight', 'minHeight'];
 
-// export default [...allowProperties, ...lengthProperties];
+export const border = [
+  'borderWidth',
+  'borderTopWidth',
+  'borderBottomWidth',
+  'borderLeftWidth',
+  'borderRightWidth',
+  'borderStartWidth',
+  'borderEndWidth',
+];
 
-export const distance = ['margin', 'padding'];
+export const position = ['top', 'bottom', 'left', 'right', 'start', 'end'];
+
+export const margin = [
+  'margin',
+  'marginTop',
+  'marginBottom',
+  'marginLeft',
+  'marginRight',
+  'marginStart',
+  'marginEnd',
+  'marginHorizontal',
+  'marginVertical',
+];
+
+export const padding = [
+  'padding',
+  'paddingTop',
+  'paddingBottom',
+  'paddingLeft',
+  'paddingRight',
+  'paddingStart',
+  'paddingEnd',
+  'paddingHorizontal',
+  'paddingVertical',
+];
+
 export const font = ['fontSize'];
+
+export const distance = [...width, ...height, ...border, ...position, ...margin, ...padding];
+
+export default [...distance, ...font];
