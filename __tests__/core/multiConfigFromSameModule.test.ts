@@ -97,24 +97,24 @@ test({
         `,
     },
     // already import other same name module in the other file
-    {
-      code: `
-          import scaleFont from 'otherModule';
-          const styles = StyleSheet.create({
-            margin: 10,
-            padding: 20,
-            fontSize: 30,
-          })
-        `,
-      output: `
-          import scaleFont from 'otherModule';
-          import { scaleSize } from 'react-native-style-adaptation-runtime';
-          const styles = StyleSheet.create({
-            margin: scaleSize(10),
-            padding: scaleSize(20),
-            fontSize: scaleFont(30),
-          });
-        `,
-    },
+    // {
+    //   code: `
+    //       import scaleFont from 'otherModule';
+    //       const styles = StyleSheet.create({
+    //         margin: 10,
+    //         padding: 20,
+    //         fontSize: 30,
+    //       })
+    //     `,
+    //   output: `
+    //       import scaleFont from 'otherModule';
+    //       import { scaleSize } from 'react-native-style-adaptation-runtime';
+    //       const styles = StyleSheet.create({
+    //         margin: scaleSize(10),
+    //         padding: scaleSize(20),
+    //         fontSize: scaleFont(30),
+    //       });
+    //     `,
+    // },
   ],
 });
