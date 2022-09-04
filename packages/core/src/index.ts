@@ -1,7 +1,7 @@
 import { PluginObj } from '@babel/core';
 import { NodePath } from '@babel/core';
 import * as t from '@babel/types';
-export { distance, font } from './properties';
+export * as properties from './properties';
 
 export const PLUGIN_NAME = 'babel-plugin-react-native-style-adaptation';
 const validateStatus = Symbol(PLUGIN_NAME);

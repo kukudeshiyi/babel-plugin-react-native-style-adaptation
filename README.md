@@ -7,16 +7,16 @@ Before using this plugin, you must need to write the stylesheet like this:
 ```ts
 const styles = StyleSheet.create({
   container: {
-    margin: adaptationFunc1(10),
-    padding: adaptationFunc1(5),
+    margin: scaleSize(10),
+    padding: scaleSize(5),
   },
   text: {
-    fontSize: adaptationFunc2(16),
+    fontSize: scaleSize(16),
   },
 });
 ```
 
-After using the plugin in your project, you don't need to write **adaptationFunc**：
+After using the plugin in your project, you don't need to write **scaleSize**：
 
 ```ts
 const styles = StyleSheet.create({
