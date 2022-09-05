@@ -6,6 +6,9 @@ export * as properties from './properties';
 export const PLUGIN_NAME = 'babel-plugin-react-native-style-adaptation';
 const validateStatus = Symbol(PLUGIN_NAME);
 
+const numberRE = /^\d{1,}$/;
+const percentageRE = /^\d{1,}%$/;
+
 interface Config {
   properties: string[];
   module: string;
@@ -36,6 +39,8 @@ function normalTransform(path: NodePath<t.ObjectProperty>, state: State) {
     return;
   }
 
+  // TODO: 忽略文件不作处理
+
   const configs = state.opts.configs;
   const propertyName = path.node.key.name || '';
   const config = configs.find((config) => config.properties.includes(propertyName));
@@ -48,12 +53,23 @@ function normalTransform(path: NodePath<t.ObjectProperty>, state: State) {
     return;
   }
 
+  let value = propertyValue.value;
+
+  if (isString(value) && (percentageRE.test(value) || !numberRE.test(value))) {
+    return;
+  }
+
   const module = config.module;
   const source = config.source;
+  value = isString(value) ? Number(value) : value;
 
-  const node = addAdaptation(propertyValue.value, module);
+  const node = addAdaptation(value, module);
   path.node.value = node;
   injectImportExpression(path, module, source);
+}
+
+function addAdaptation(value: number, module: Config['module']) {
+  return t.callExpression(t.identifier(module), [t.numericLiteral(value)]);
 }
 
 function injectImportExpression(
@@ -129,12 +145,6 @@ function validate(configs: Config[]) {
     }
   }
   return true;
-}
-
-function addAdaptation(value: string | number, module: Config['module']) {
-  return t.callExpression(t.identifier(module), [
-    isString(value) ? t.stringLiteral(value) : t.numericLiteral(value),
-  ]);
 }
 
 function createImportDeclarationNode(module: Config['module'], source: Config['source']) {
