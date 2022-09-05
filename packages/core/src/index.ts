@@ -15,9 +15,14 @@ interface Config {
   source: string;
 }
 
+interface Options {
+  configs: Config[];
+  ignore(filename: string, state: State): boolean;
+}
+
 interface State {
   [validateStatus]: boolean;
-  opts: { configs: Config[] };
+  opts: Options;
 }
 
 export default (): PluginObj<State> => {
@@ -39,7 +44,13 @@ function normalTransform(path: NodePath<t.ObjectProperty>, state: State) {
     return;
   }
 
+  const ignore = state.opts.ignore;
+  const ignoreFunc = typeof ignore === 'function' ? ignore : ignoreInternal;
+
   // TODO: 忽略文件不作处理
+  if (ignoreFunc('', state)) {
+    return;
+  }
 
   const configs = state.opts.configs;
   const propertyName = path.node.key.name || '';
@@ -164,4 +175,9 @@ function isProgramNode(node: any): node is t.Program {
 
 function isImportDeclarationNode(node: any): node is t.ImportDeclaration {
   return t.isImportDeclaration(node);
+}
+
+function ignoreInternal(filename: string, state: State) {
+  //TODO:
+  return true;
 }
