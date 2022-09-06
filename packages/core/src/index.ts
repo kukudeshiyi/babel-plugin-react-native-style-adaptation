@@ -3,7 +3,9 @@ import { NodePath } from '@babel/core';
 import * as t from '@babel/types';
 export * as properties from './properties';
 import { PLUGIN_NAME } from './constants';
-import { logError } from './log';
+import { logError, logWarning } from './log';
+
+export { PLUGIN_NAME } from './constants';
 
 const validateStatus = Symbol(PLUGIN_NAME);
 
@@ -116,7 +118,20 @@ function injectImportExpression(
     return programPath.node.body.unshift(createImportDeclarationNode(module, source));
   }
 
-  // TODO：如果代码中存在 module 相同，但是 source 不同的模块，则不会再引入对应 source 的模块，而是使用现有模块
+  const matchModuleNameFromOtherSourcePath = find((nodePath) => {
+    if (t.isImportDeclaration(nodePath.node) && nodePath.node.source.value !== source) {
+      const importNodeSpecifiers = nodePath.node.specifiers;
+      return !!importNodeSpecifiers.find((v) => v.local.name === module);
+    }
+    return false;
+  });
+
+  if (matchModuleNameFromOtherSourcePath) {
+    logWarning(
+      `In the file - ${filename}, the ${module} module is imported from other paths, not from the configured path - ${source}. We will use this module and will not process it again.`,
+    );
+    return;
+  }
 
   const matchedLibraryPath = find(
     (nodePath) => t.isImportDeclaration(nodePath.node) && nodePath.node.source.value === source,
