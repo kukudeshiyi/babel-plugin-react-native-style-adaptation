@@ -6,7 +6,11 @@ export { InitParams } from './types';
 
 export let designDraftWidth: InitParams['designDraftWidth'] = DEFAULT_DESIGN_DRAFT_WIDTH;
 
+// TODO: 补充单侧
 export function scaleSize(size: number) {
+  if (typeof size !== 'number') {
+    return size;
+  }
   return size * (WINDOW_WIDTH / designDraftWidth);
 }
 
