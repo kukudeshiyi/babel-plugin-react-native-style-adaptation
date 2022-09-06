@@ -23,6 +23,7 @@ interface Options {
 interface State {
   [validateStatus]: boolean;
   opts: Options;
+  filename?: string;
 }
 
 export default (): PluginObj<State> => {
@@ -46,9 +47,9 @@ function normalTransform(path: NodePath<t.ObjectProperty>, state: State) {
 
   const ignore = state.opts.ignore;
   const ignoreFunc = typeof ignore === 'function' ? ignore : ignoreInternal;
+  const filename = state.filename || '';
 
-  // TODO: 忽略文件不作处理
-  if (ignoreFunc('', state)) {
+  if (ignoreFunc(filename, state)) {
     return;
   }
 
@@ -178,6 +179,5 @@ function isImportDeclarationNode(node: any): node is t.ImportDeclaration {
 }
 
 function ignoreInternal(filename: string, state: State) {
-  //TODO:
-  return true;
+  return filename.includes('node_modules');
 }
