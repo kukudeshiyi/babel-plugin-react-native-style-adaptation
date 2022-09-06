@@ -2,8 +2,9 @@ import { PluginObj } from '@babel/core';
 import { NodePath } from '@babel/core';
 import * as t from '@babel/types';
 export * as properties from './properties';
+import { PLUGIN_NAME } from './constants';
+import { logError } from './log';
 
-export const PLUGIN_NAME = 'babel-plugin-react-native-style-adaptation';
 const validateStatus = Symbol(PLUGIN_NAME);
 
 const numberRE = /^\d{1,}$/;
@@ -37,8 +38,11 @@ export default (): PluginObj<State> => {
   return {
     name: PLUGIN_NAME,
     pre() {
-      // TODO: error 校验出错，进程退出
-      this[validateStatus] = validate(this.opts?.configs || []);
+      const status = validate(this.opts?.configs || []);
+      if (!status) {
+        logError('There is a problem with the parameters, please check!');
+      }
+      this[validateStatus] = status;
     },
     visitor: {
       ObjectProperty(path, state) {
@@ -85,7 +89,7 @@ function normalTransform(path: NodePath<t.ObjectProperty>, state: State) {
 
   const node = addAdaptation(value, module);
   path.node.value = node;
-  injectImportExpression(path, module, source);
+  injectImportExpression(path, module, source, filename);
 }
 
 function addAdaptation(value: number, module: Config['module']) {
@@ -96,6 +100,7 @@ function injectImportExpression(
   currentPath: NodePath<t.ObjectProperty>,
   module: Config['module'],
   source: Config['source'],
+  filename: string,
 ) {
   const programPath = currentPath.findParent((parentNode) => t.isProgram(parentNode));
 
@@ -127,7 +132,7 @@ function injectImportExpression(
   if (matchedLibraryPath && isImportDeclarationNode(matchedLibraryPath.node)) {
     const importNode = matchedLibraryPath.node;
     if (!importNode.specifiers) {
-      // TODO: 没有导出模块，error
+      logError(`In the ${filename}, no module is imported from the ${source}`);
       return;
     }
 
