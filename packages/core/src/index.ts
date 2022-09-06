@@ -9,6 +9,13 @@ const validateStatus = Symbol(PLUGIN_NAME);
 const numberRE = /^\d{1,}$/;
 const percentageRE = /^\d{1,}%$/;
 
+// TODO: 补充单元测试
+/**
+ * 测试 ignore
+ * 测试对于字符串值的处理
+ * 测试 如果代码中存在 module 相同，但是 source 不同的模块，则不会再引入对应 source 的模块，而是使用现有模块
+ */
+
 interface Config {
   properties: string[];
   module: string;
@@ -30,6 +37,7 @@ export default (): PluginObj<State> => {
   return {
     name: PLUGIN_NAME,
     pre() {
+      // TODO: error 校验出错，进程退出
       this[validateStatus] = validate(this.opts?.configs || []);
     },
     visitor: {
@@ -119,7 +127,7 @@ function injectImportExpression(
   if (matchedLibraryPath && isImportDeclarationNode(matchedLibraryPath.node)) {
     const importNode = matchedLibraryPath.node;
     if (!importNode.specifiers) {
-      // TODO: error
+      // TODO: 没有导出模块，error
       return;
     }
 
@@ -134,25 +142,17 @@ function injectImportExpression(
 
 function validate(configs: Config[]) {
   if (!Array.isArray(configs) || configs.length <= 0) {
-    //TODO: error
-    console.log('error', 1);
     return false;
   }
   for (const config of configs) {
     const { properties, module, source } = config;
     if (!Array.isArray(properties) || properties.length <= 0) {
-      //TODO: error
-      console.log('error', 2);
       return false;
     }
     if (typeof module !== 'string') {
-      //TODO: error
-      console.log('error', 3);
       return false;
     }
     if (typeof source !== 'string') {
-      //TODO: error
-      console.log('error', 4);
       return false;
     }
   }
