@@ -45,7 +45,6 @@ importers:
       '@types/babel__core': ^7.1.6
       chalk: 4.1.2
       husky: ^4.2.3
-      install: ^0.13.0
       lint-staged: ^10.0.10
       typescript: ^3.8.3
     dependencies:
@@ -55,7 +54,6 @@ importers:
     devDependencies:
       '@types/babel__core': 7.1.19
       husky: 4.3.8
-      install: 0.13.0
       lint-staged: 10.5.4
       typescript: 3.9.10
 
@@ -4141,11 +4139,6 @@ packages:
 
   /inherits/2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
-    dev: true
-
-  /install/0.13.0:
-    resolution: {integrity: sha512-zDml/jzr2PKU9I8J/xyZBQn8rPCAY//UOYNmR01XwNwyfhEWObo2SWfSl1+0tm1u6PhxLwDnfsT/6jB7OUxqFA==}
-    engines: {node: '>= 0.10'}
     dev: true
 
   /internal-slot/1.0.3:

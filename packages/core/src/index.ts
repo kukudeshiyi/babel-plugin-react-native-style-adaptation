@@ -12,18 +12,18 @@ const validateStatus = Symbol(PLUGIN_NAME);
 const numberRE = /^\d{1,}$/;
 const percentageRE = /^\d{1,}%$/;
 
-interface Config {
+export interface Config {
   properties: string[];
   module: string;
   source: string;
 }
 
-interface Options {
+export interface Options {
   configs: Config[];
   ignore(filename: string, state: State): boolean;
 }
 
-interface State {
+export interface State {
   [validateStatus]: boolean;
   opts: Options;
   filename?: string;
