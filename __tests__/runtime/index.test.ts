@@ -16,3 +16,8 @@ test('init', () => {
   expect(designDraftWidth).toEqual(customValue);
   expect(scaleSize(50)).toEqual(50 * (600 / customValue));
 });
+
+test('handle string param', () => {
+  //@ts-expect-error
+  expect(scaleSize('100%')).toEqual('100%');
+});
