@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "react native device adaptation utiltis",
   "main": "lib/index.js",
-  "types": "module",
+  "types": "lib/index.d.ts",
   "files": [
     "lib"
   ],
@@ -13,6 +13,7 @@
     "adaptation"
   ],
   "scripts": {
+    "prepare": "npm run build",
     "build": "rimraf lib && tsc"
   },
   "repository": {
