@@ -13,12 +13,16 @@ test({
         source: 'react-native-style-adaptation-runtime',
       },
     ],
+    ignore: (filename?: string) => {
+      filename = filename || '';
+      return filename.includes('custom_ignore_for_test');
+    },
   },
   pluginName: PLUGIN_NAME,
   tests: [
     // base
     {
-      fixture: path.join(__dirname, './node_modules_for_test/test.code.ts'),
+      fixture: path.join(__dirname, './custom_ignore_for_test/test.code.ts'),
       output: `
           const styles = StyleSheet.create({
             margin: 10,
