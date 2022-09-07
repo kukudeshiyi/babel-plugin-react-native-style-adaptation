@@ -12,13 +12,6 @@ const validateStatus = Symbol(PLUGIN_NAME);
 const numberRE = /^\d{1,}$/;
 const percentageRE = /^\d{1,}%$/;
 
-// TODO: 补充单元测试
-/**
- * 测试 ignore
- * 测试对于字符串值的处理
- * 测试 如果代码中存在 module 相同，但是 source 不同的模块，则不会再引入对应 source 的模块，而是使用现有模块
- */
-
 interface Config {
   properties: string[];
   module: string;

@@ -3,7 +3,7 @@
   "private": true,
   "types": "module",
   "scripts": {
-    "test": "jest"
+    "test": "jest test.ts"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",

@@ -18,13 +18,13 @@ test({
   tests: [
     // base
     {
-      fixture: path.join(__dirname, './node_modules_for_test/test.code.ts'),
+      fixture: path.join(__dirname, './node_modules_for_test/code.ts'),
       output: `
-          const styles = StyleSheet.create({
+          export const styles = {
             margin: 10,
             padding: 20,
             fontSize: 30,
-          });
+          };
         `,
     },
   ],
