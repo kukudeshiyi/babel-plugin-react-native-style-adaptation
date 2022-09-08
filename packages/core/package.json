@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-react-native-style-adaptation",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Add device-appropriate handlers to stylesheets so you don't have to manually add them during development",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
