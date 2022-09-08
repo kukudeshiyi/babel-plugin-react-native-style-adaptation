@@ -32,6 +32,9 @@
     "url": "https://github.com/kukudeshiyi/babel-plugin-react-native-style-adaptation/issues"
   },
   "homepage": "https://github.com/kukudeshiyi/babel-plugin-react-native-style-adaptation#babel-plugin-react-native-style-sheet",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "devDependencies": {
     "@types/babel__core": "^7.1.6",
     "husky": "^4.2.3",

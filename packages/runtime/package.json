@@ -20,6 +20,9 @@
     "type": "git",
     "url": "git@github.com:kukudeshiyi/babel-plugin-react-native-style-adaptation.git"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "author": "yi.shi",
   "license": "MIT",
   "peerDependencies": {
