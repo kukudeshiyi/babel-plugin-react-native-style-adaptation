@@ -2,6 +2,7 @@
   "name": "root",
   "private": true,
   "scripts": {
+    "prepare": "npm run test",
     "test": "jest test.ts"
   },
   "devDependencies": {
